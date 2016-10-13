@@ -8,11 +8,7 @@ public class Queue extends List {
 	
 	public int deQueue(){
 		
-		Node n = new Node();
-		
-		n = this.removeLast();
-		
-		
+		Node n = this.removeLast();
 		return n.getData();
 		
 	}
