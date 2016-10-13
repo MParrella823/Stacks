@@ -17,6 +17,7 @@ public class StackDriver {
 		System.out.println(s.pop());
 		s.print();
 		
+		
 		System.out.println("Stack size: " + s.size());
 		
 	
