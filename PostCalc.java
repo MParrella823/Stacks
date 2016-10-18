@@ -1,8 +1,19 @@
 import java.util.Scanner;
 
+/**
+ * @author Matt Parrella
+ *
+ */
 
 public class PostCalc {
-	
+	    /**
+	     * 
+	     * This method will simulate a post-fix calculator.  Will continue to ask for input until user
+	     * enters 'quit'.
+	     * 
+	     * @return void 
+	     * 
+	     */
 		public static void execute(){
 			String s = null;
 			
@@ -11,13 +22,12 @@ public class PostCalc {
 				System.out.print("#");
 				Scanner kb  = new Scanner(System.in);
 				s = kb.nextLine(); // Takes user's input from the keyboard, entire line at a time
-				Scanner input = new Scanner(new String(s)); // Converts input to a String
-				
+								
 				int answer = 0;
 				
 				if (s.equals("quit")){
 					kb.close();
-					input.close();
+					//input.close();
 					break;
 				}
 				
@@ -33,14 +43,14 @@ public class PostCalc {
 					 * 
 					 */
 
-					for (int i = 0; i < s.length(); i ++){  
+					for (int i = 0; i < s.length(); i ++){  // Loop through the string
 						int a = 0;
 						int b = 0;
 						int d = 0;
-						char c = s.charAt(i);  // Variable to hold the character value at each index
+						char c = s.charAt(i);  // Variable to hold the character at each index
 
 						if (Character.isDigit(c) == true){  
-							int x = Character.getNumericValue(c); // If yes, get the numerical value (otherwise ASCII value is used)
+							int x = Character.getNumericValue(c); // get the numerical value (otherwise ASCII value is used)
 							s1.push(x); 
 						}
 
@@ -80,9 +90,7 @@ public class PostCalc {
 							b = s1.pop();
 							
 							if (a == 0){
-								
 								System.out.println("Error: Division by zero!");
-								
 							}
 							
 							else{
