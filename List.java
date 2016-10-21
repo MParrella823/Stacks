@@ -40,6 +40,7 @@ public class List {
 	 * This method will add the passed value to the front of the list as a new node
 	 * 
 	 * @param val int The number to be added to the list
+	 * 
 	 */
 	
 	public void add(int val){
@@ -273,9 +274,12 @@ public class List {
 	
 	/**
 	 * 
-	 * This method will remove the first node from a list and print out the Node location in memory.
 	 * 
-	 * @return Node The first node in the list that was removed
+	 * This method will remove the last node from the list and return it's pointer to the user.
+	 * 
+	 * 
+	 * @return curr Type Node, the last node in the list
+	 * 
 	 */
 	
 	
@@ -306,6 +310,13 @@ public class List {
 		
 		
 	}
+	
+	/**
+	 * 
+	 * This method will remove the first node from a list and print out the Node location in memory.
+	 * 
+	 * @return Node The first node in the list that was removed
+	 */
 	
 	public Node removeFirst(){
 		

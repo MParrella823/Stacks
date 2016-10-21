@@ -6,66 +6,61 @@ import java.util.Scanner;
  */
 
 public class PostCalc {
-	    /**
-	     * 
-	     * This method will simulate a post-fix calculator.  Will continue to ask for input until user
-	     * enters 'quit'.
-	     * 
-	     * @return void 
-	     * 
-	     */
-		public static void execute(){
-			String s = null;
+	/**
+	 * 
+	 * This method will simulate a post-fix calculator.  Will continue to ask for input until user
+	 * enters 'quit'.
+	 * 
+	 * @return void 
+	 * 
+	 */
+	public static void execute(){
+		String s = null;
+		Scanner kb  = new Scanner(System.in);
+
+		do {
+			Stack s1 = new Stack();
+			System.out.print("#");
+			s = kb.nextLine(); // Takes user's input from the keyboard, entire line at a time
+			int answer = 0;
 			
-			do {
-				Stack s1 = new Stack();
-				System.out.print("#");
-				Scanner kb  = new Scanner(System.in);
-				s = kb.nextLine(); // Takes user's input from the keyboard, entire line at a time
-								
-				int answer = 0;
-				
-				if (s.equals("quit")){
-					kb.close();
-					//input.close();
-					break;
-				}
-				
-				else{
-				
+			if (s.equals("quit")){
+				kb.close();
+				break;
+			}
+
+			else{	
+
+				int a = 0;
+				int b  = 0;
+				int val = 0;
+				int d = 0;
+				char c = 0;
+
+				for (int i = 0; i < s.length(); i++){  // Loop through the string
+
+					c = s.charAt(i);
+                    
+					
 					/*
-					 * The following loop will traverse the string, storing the value at each index
-					 * as a character variable.  It will then check if that variable is a digit or an operand.
 					 * 
-					 * If it's a digit, it will add that number to the stack and continue on in this manner
-					 * until it finds an operand.  It will then perform that arithmatic on the two numbers in 
-					 * in the stack and push the answer onto the stack.
+					 * Lines 51 - 54 will perform two checks.  First, to ensure there is no 
+					 * white space at the index. And second, to ensure the character at the index
+					 * is a digit.  Numbers that have more than one digit will be covered as the 
+					 * val variable is updated accordingly.
+					 * 
 					 * 
 					 */
-
-					for (int i = 0; i < s.length(); i ++){  // Loop through the string
-						int a = 0;
-						int b = 0;
-						int d = 0;
-						char c = s.charAt(i);  // Variable to hold the character at each index
-
-						if (Character.isDigit(c) == true){  
-							int x = Character.getNumericValue(c); // get the numerical value (otherwise ASCII value is used)
-							s1.push(x); 
+					if (Character.isWhitespace(c) == false){
+						if (Character.isDigit(c) == true){
+							val = val * 10 + Character.getNumericValue(c);
 						}
-
-						/*
-						 * The remaining conditionals will check for operands in the string.
-						 * If found, it will perform the operation on the previous two numbers
-						 * and add the result to the stack
-						 * 
-						 */
-
-						else if (c == '+'){ 
+						
+						//  The following conditionals will check for operands, perform them and push/pop from the stack accordingly
+						else if (c == '+'){
 							a = s1.pop();
 							b = s1.pop();
 							d = b + a;
-
 							s1.push(d);
 						}
 
@@ -73,39 +68,51 @@ public class PostCalc {
 							a = s1.pop();
 							b = s1.pop();
 							d = b - a;
-
 							s1.push(d);
 						}
-
+						
 						else if (c == '*'){
 							a = s1.pop();
 							b = s1.pop();
 							d = b * a;
-
 							s1.push(d);
 						}
 
 						else if (c == '/'){
 							a = s1.pop();
 							b = s1.pop();
-							
-							if (a == 0){
+							if (a == 0){ // Check if denominator is 0
 								System.out.println("Error: Division by zero!");
 							}
-							
-							else{
+							else {
 								d = b / a;
 								s1.push(d);
 							}
-						}					
-					}				
-				// The last item added to the stack will be the final answer
-			 	answer = s1.pop();
-				System.out.println("Answer: " + answer);
-				}
+						}
+					}
+
+					/*
+					 * Lines 95-100 will handle the case where the character at the index
+					 * is a whitespace.  If val is greater than zero, it will push to the stack. 
+					 * If this check was not made, the value of 0 would be pushed to the stack, causing
+					 * miscalculations.
+					 * 
+					 */
+					else {
+						if (val != 0){
+							s1.push(val);
+						}
+						val = 0;	
+					}	
+
+				}			
+
 			}
-			
-			while (!s.equals("quit"));
-			System.out.println("Exiting the PostCalc program!");		
+			answer = s1.pop();
+			System.out.println("Answer: " + answer);
 		}
+		while (!s.equals("quit"));
+		kb.close();
+		System.out.println("Exiting the PostCalc program!");		
+	}
 }
